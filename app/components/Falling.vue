@@ -52,6 +52,10 @@ const particlesRef = ref<Points | null>(null)
 // 模型引用
 const modelRef = ref<any>(null)
 
+// 模型路径 - 使用 useRuntimeConfig 获取正确的 baseURL
+const config = useRuntimeConfig()
+const modelPath = `${config.app.baseURL}Falling.glb`.replace('//', '/')
+
 // 修复模型材质的函数
 const fixModelMaterials = (model: any) => {
     console.log('🔧 开始修复模型材质', model)
@@ -197,5 +201,5 @@ console.log('🔍 准备加载模型: /Falling.glb')
     </TresPoints>
 
     <!-- ===== MC小人模型 ===== -->
-    <GLTFModel ref="modelRef" path="/Falling.glb" :position="[0, 0, 0]" :scale="[2, 2, 2]" />
+    <GLTFModel ref="modelRef" :path="modelPath" :position="[0, 0, 0]" :scale="[2, 2, 2]" />
 </template>
